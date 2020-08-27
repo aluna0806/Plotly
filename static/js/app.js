@@ -50,5 +50,41 @@ function Demos(ID) {
     });
 };
 
+function Plots(ID) {
+    d3.json(url).then(function(plotData) {
+        //filter samples data to ID for plotting
+        var samplePlot = plotData.samples.filter(plotID => plotID.id == ID)[0];
+        //slice sample data: otu_ids, otu_labels, and sample_values
+        //map otu_ids to string with OTU label
+        var slice_otu_ids = samplePlot.otu_ids.slice(0, 10).map(id => "OTU "+id.toString());
+        var slice_otu_labels = samplePlot.otu_labels.slice(0, 10);
+        var slice_sample_values = samplePlot.sample_values.slice(0, 10);
+        
+        //BAR CHART plot
+        var traceBar = {
+            type: 'bar',
+            x: slice_sample_values.reverse(),
+            y: slice_otu_ids.reverse(),
+            text: slice_otu_labels.reverse(),
+            marker: {
+                color: '#1978B5',
+              },
+            orientation: 'h'
+        };
+
+        var barData = [traceBar];
+
+        var barLayout = {
+            title: 'Top 10 Microbes (OTUs) Found',
+            showlegend: false,
+            width: 600,
+            height: 400
+        };
+
+        Plotly.newPlot('bar', barData, barLayout);
+        
+    });
+};
+
 //run init to start
 init();
