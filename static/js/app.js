@@ -110,5 +110,11 @@ function Plots(ID) {
     });
 };
 
+//Reload w/ change in dropdown
+function optionChanged(newID) {
+    Demos(newID);
+    Plots(newID);
+  };
+
 //run init to start
 init();
