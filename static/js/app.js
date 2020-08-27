@@ -92,7 +92,7 @@ function Plots(ID) {
             mode: 'markers',
             marker: {
                 color: otu_ids,
-                colorscale: 'Viridis',
+                colorscale: 'Blues',
                 size: slice_sample_values
               },
             text: slice_otu_labels
