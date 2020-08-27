@@ -49,3 +49,6 @@ function Demos(ID) {
         });
     });
 };
+
+//run init to start
+init();
