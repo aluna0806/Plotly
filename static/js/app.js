@@ -60,7 +60,7 @@ function Plots(ID) {
         var slice_otu_labels = samplePlot.otu_labels.slice(0, 10);
         var slice_sample_values = samplePlot.sample_values.slice(0, 10);
         
-        //BAR CHART plot
+        //BAR CHART
         var traceBar = {
             type: 'bar',
             x: slice_sample_values.reverse(),
@@ -82,7 +82,31 @@ function Plots(ID) {
         };
 
         Plotly.newPlot('bar', barData, barLayout);
-        
+
+        //BUBBLE CHART
+        var otu_ids = samplePlot.otu_ids.slice(0, 10);
+        var traceBubble = {
+            type: 'bubble',
+            x: otu_ids,
+            y: slice_sample_values,
+            mode: 'markers',
+            marker: {
+                color: otu_ids,
+                colorscale: 'Viridis',
+                size: slice_sample_values
+              },
+            text: slice_otu_labels
+        };
+
+        var bubbleData = [traceBubble];
+
+        var bubbleLayout = {
+            title: "Microbe Type Bubble Chart",
+            x: "OTU ID",
+            pointStyle: "circle"
+        }
+
+        Plotly.newPlot('bubble', bubbleData, bubbleLayout);
     });
 };
 
